@@ -6,23 +6,60 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F8A7DE002E045DAB007EA031 /* whisper.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8A7DDFF2E045DAB007EA031 /* whisper.xcframework */; };
+		F8A7DE012E045DAB007EA031 /* whisper.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F8A7DDFF2E045DAB007EA031 /* whisper.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F8A7DE0F2E0466BA007EA031 /* LibWhisper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE0D2E0466BA007EA031 /* LibWhisper.swift */; };
+		F8A7DE202E0467E7007EA031 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8A7DE152E0467E7007EA031 /* Preview Assets.xcassets */; };
+		F8A7DE212E0467E7007EA031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8A7DE1A2E0467E7007EA031 /* Assets.xcassets */; };
+		F8A7DE232E0467E7007EA031 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE122E0467E7007EA031 /* Model.swift */; };
+		F8A7DE242E0467E7007EA031 /* WhisperState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE132E0467E7007EA031 /* WhisperState.swift */; };
+		F8A7DE252E0467E7007EA031 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE172E0467E7007EA031 /* Recorder.swift */; };
+		F8A7DE262E0467E7007EA031 /* RiffWaveUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE182E0467E7007EA031 /* RiffWaveUtils.swift */; };
+		F8A7DE272E0467E7007EA031 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE1B2E0467E7007EA031 /* ContentView.swift */; };
+		F8A7DE282E0467E7007EA031 /* pera_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE1D2E0467E7007EA031 /* pera_appApp.swift */; };
+		F8A7DE2D2E0468FA007EA031 /* ggml-base.bin in Resources */ = {isa = PBXBuildFile; fileRef = F8A7DE292E0467FB007EA031 /* ggml-base.bin */; };
+		F8A7DE2E2E0468FF007EA031 /* ggml-base-encoder.mlmodelc in Resources */ = {isa = PBXBuildFile; fileRef = F8A7DE2A2E0467FB007EA031 /* ggml-base-encoder.mlmodelc */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F8A7DE022E045DAB007EA031 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F8A7DE012E045DAB007EA031 /* whisper.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		F8A7DDEC2E045353007EA031 /* pera-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pera-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8A7DDFF2E045DAB007EA031 /* whisper.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = whisper.xcframework; path = "../whisper.cpp/build-apple/whisper.xcframework"; sourceTree = "<group>"; };
+		F8A7DE0D2E0466BA007EA031 /* LibWhisper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibWhisper.swift; sourceTree = "<group>"; };
+		F8A7DE122E0467E7007EA031 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		F8A7DE132E0467E7007EA031 /* WhisperState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhisperState.swift; sourceTree = "<group>"; };
+		F8A7DE152E0467E7007EA031 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F8A7DE172E0467E7007EA031 /* Recorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
+		F8A7DE182E0467E7007EA031 /* RiffWaveUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiffWaveUtils.swift; sourceTree = "<group>"; };
+		F8A7DE1A2E0467E7007EA031 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F8A7DE1B2E0467E7007EA031 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F8A7DE1C2E0467E7007EA031 /* pera_app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pera_app.entitlements; sourceTree = "<group>"; };
+		F8A7DE1D2E0467E7007EA031 /* pera_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pera_appApp.swift; sourceTree = "<group>"; };
+		F8A7DE292E0467FB007EA031 /* ggml-base.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-base.bin"; sourceTree = "<group>"; };
+		F8A7DE2A2E0467FB007EA031 /* ggml-base-encoder.mlmodelc */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "ggml-base-encoder.mlmodelc"; sourceTree = "<group>"; };
+		F8A7DE2F2E046E8D007EA031 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		F8A7DDEE2E045353007EA031 /* pera-app */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "pera-app";
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		F8A7DDE92E045353007EA031 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8A7DE002E045DAB007EA031 /* whisper.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,7 +69,9 @@
 		F8A7DDE32E045353007EA031 = {
 			isa = PBXGroup;
 			children = (
-				F8A7DDEE2E045353007EA031 /* pera-app */,
+				F8A7DE0E2E0466BA007EA031 /* whisper.cpp.swift */,
+				F8A7DE1F2E0467E7007EA031 /* pera-app */,
+				F8A7DDFE2E045DAB007EA031 /* Frameworks */,
 				F8A7DDED2E045353007EA031 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -45,6 +84,73 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F8A7DDFE2E045DAB007EA031 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F8A7DDFF2E045DAB007EA031 /* whisper.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F8A7DE0E2E0466BA007EA031 /* whisper.cpp.swift */ = {
+			isa = PBXGroup;
+			children = (
+				F8A7DE0D2E0466BA007EA031 /* LibWhisper.swift */,
+			);
+			path = whisper.cpp.swift;
+			sourceTree = "<group>";
+		};
+		F8A7DE142E0467E7007EA031 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F8A7DE122E0467E7007EA031 /* Model.swift */,
+				F8A7DE132E0467E7007EA031 /* WhisperState.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F8A7DE162E0467E7007EA031 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F8A7DE152E0467E7007EA031 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F8A7DE192E0467E7007EA031 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F8A7DE172E0467E7007EA031 /* Recorder.swift */,
+				F8A7DE182E0467E7007EA031 /* RiffWaveUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		F8A7DE1F2E0467E7007EA031 /* pera-app */ = {
+			isa = PBXGroup;
+			children = (
+				F8A7DE2F2E046E8D007EA031 /* Info.plist */,
+				F8A7DE2C2E0467FB007EA031 /* Resources */,
+				F8A7DE142E0467E7007EA031 /* Models */,
+				F8A7DE162E0467E7007EA031 /* Preview Content */,
+				F8A7DE192E0467E7007EA031 /* Utils */,
+				F8A7DE1A2E0467E7007EA031 /* Assets.xcassets */,
+				F8A7DE1B2E0467E7007EA031 /* ContentView.swift */,
+				F8A7DE1C2E0467E7007EA031 /* pera_app.entitlements */,
+				F8A7DE1D2E0467E7007EA031 /* pera_appApp.swift */,
+			);
+			path = "pera-app";
+			sourceTree = "<group>";
+		};
+		F8A7DE2C2E0467FB007EA031 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F8A7DE292E0467FB007EA031 /* ggml-base.bin */,
+				F8A7DE2A2E0467FB007EA031 /* ggml-base-encoder.mlmodelc */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -55,13 +161,11 @@
 				F8A7DDE82E045353007EA031 /* Sources */,
 				F8A7DDE92E045353007EA031 /* Frameworks */,
 				F8A7DDEA2E045353007EA031 /* Resources */,
+				F8A7DE022E045DAB007EA031 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				F8A7DDEE2E045353007EA031 /* pera-app */,
 			);
 			name = "pera-app";
 			packageProductDependencies = (
@@ -109,6 +213,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8A7DE202E0467E7007EA031 /* Preview Assets.xcassets in Resources */,
+				F8A7DE2E2E0468FF007EA031 /* ggml-base-encoder.mlmodelc in Resources */,
+				F8A7DE212E0467E7007EA031 /* Assets.xcassets in Resources */,
+				F8A7DE2D2E0468FA007EA031 /* ggml-base.bin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +227,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8A7DE232E0467E7007EA031 /* Model.swift in Sources */,
+				F8A7DE242E0467E7007EA031 /* WhisperState.swift in Sources */,
+				F8A7DE252E0467E7007EA031 /* Recorder.swift in Sources */,
+				F8A7DE262E0467E7007EA031 /* RiffWaveUtils.swift in Sources */,
+				F8A7DE272E0467E7007EA031 /* ContentView.swift in Sources */,
+				F8A7DE282E0467E7007EA031 /* pera_appApp.swift in Sources */,
+				F8A7DE0F2E0466BA007EA031 /* LibWhisper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +372,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "pera-app/Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "\"This app records audio to transcribe speech.\"";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -284,7 +401,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "pera-app/Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "\"This app records audio to transcribe speech.\"";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
