@@ -1,0 +1,3 @@
+Put these files in if want to use Whisper:
+- ggml-base-e...oder.mlmodelc
+- ggml-base.bin

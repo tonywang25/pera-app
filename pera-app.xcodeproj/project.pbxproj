@@ -22,8 +22,6 @@
 		F8A7DE262E0467E7007EA031 /* RiffWaveUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE182E0467E7007EA031 /* RiffWaveUtils.swift */; };
 		F8A7DE272E0467E7007EA031 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE1B2E0467E7007EA031 /* ContentView.swift */; };
 		F8A7DE282E0467E7007EA031 /* pera_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE1D2E0467E7007EA031 /* pera_appApp.swift */; };
-		F8A7DE2D2E0468FA007EA031 /* ggml-base.bin in Resources */ = {isa = PBXBuildFile; fileRef = F8A7DE292E0467FB007EA031 /* ggml-base.bin */; };
-		F8A7DE2E2E0468FF007EA031 /* ggml-base-encoder.mlmodelc in Resources */ = {isa = PBXBuildFile; fileRef = F8A7DE2A2E0467FB007EA031 /* ggml-base-encoder.mlmodelc */; };
 		F8A7DE312E048A03007EA031 /* Capturer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE302E0489D9007EA031 /* Capturer.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,11 +56,17 @@
 		F8A7DE1B2E0467E7007EA031 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F8A7DE1C2E0467E7007EA031 /* pera_app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pera_app.entitlements; sourceTree = "<group>"; };
 		F8A7DE1D2E0467E7007EA031 /* pera_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pera_appApp.swift; sourceTree = "<group>"; };
-		F8A7DE292E0467FB007EA031 /* ggml-base.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-base.bin"; sourceTree = "<group>"; };
-		F8A7DE2A2E0467FB007EA031 /* ggml-base-encoder.mlmodelc */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "ggml-base-encoder.mlmodelc"; sourceTree = "<group>"; };
 		F8A7DE2F2E046E8D007EA031 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F8A7DE302E0489D9007EA031 /* Capturer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capturer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		F85A20502E07133800C3C39F /* Resources */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		F8A7DDE92E045353007EA031 /* Frameworks */ = {
@@ -144,8 +148,8 @@
 		F8A7DE1F2E0467E7007EA031 /* pera-app */ = {
 			isa = PBXGroup;
 			children = (
+				F85A20502E07133800C3C39F /* Resources */,
 				F8A7DE2F2E046E8D007EA031 /* Info.plist */,
-				F8A7DE2C2E0467FB007EA031 /* Resources */,
 				F8A7DE142E0467E7007EA031 /* Models */,
 				F8A7DE162E0467E7007EA031 /* Preview Content */,
 				F8A7DE192E0467E7007EA031 /* Utils */,
@@ -155,15 +159,6 @@
 				F8A7DE1D2E0467E7007EA031 /* pera_appApp.swift */,
 			);
 			path = "pera-app";
-			sourceTree = "<group>";
-		};
-		F8A7DE2C2E0467FB007EA031 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				F8A7DE292E0467FB007EA031 /* ggml-base.bin */,
-				F8A7DE2A2E0467FB007EA031 /* ggml-base-encoder.mlmodelc */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +176,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				F85A20502E07133800C3C39F /* Resources */,
 			);
 			name = "pera-app";
 			packageProductDependencies = (
@@ -230,9 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8A7DE202E0467E7007EA031 /* Preview Assets.xcassets in Resources */,
-				F8A7DE2E2E0468FF007EA031 /* ggml-base-encoder.mlmodelc in Resources */,
 				F8A7DE212E0467E7007EA031 /* Assets.xcassets in Resources */,
-				F8A7DE2D2E0468FA007EA031 /* ggml-base.bin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
