@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F8804DA62E0639200077D223 /* AudioRecorder.h in Sources */ = {isa = PBXBuildFile; fileRef = F8804DA42E0638AB0077D223 /* AudioRecorder.h */; };
+		F8804DA72E0639200077D223 /* AudioRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = F8804DA32E06388E0077D223 /* AudioRecorder.mm */; };
+		F8804DA82E0639200077D223 /* AudioTapSample-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = F8804DA52E0638E60077D223 /* AudioTapSample-Bridging-Header.h */; };
 		F8A7DE002E045DAB007EA031 /* whisper.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8A7DDFF2E045DAB007EA031 /* whisper.xcframework */; };
 		F8A7DE012E045DAB007EA031 /* whisper.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F8A7DDFF2E045DAB007EA031 /* whisper.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F8A7DE0F2E0466BA007EA031 /* LibWhisper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE0D2E0466BA007EA031 /* LibWhisper.swift */; };
@@ -20,6 +23,10 @@
 		F8A7DE282E0467E7007EA031 /* pera_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE1D2E0467E7007EA031 /* pera_appApp.swift */; };
 		F8A7DE2D2E0468FA007EA031 /* ggml-base.bin in Resources */ = {isa = PBXBuildFile; fileRef = F8A7DE292E0467FB007EA031 /* ggml-base.bin */; };
 		F8A7DE2E2E0468FF007EA031 /* ggml-base-encoder.mlmodelc in Resources */ = {isa = PBXBuildFile; fileRef = F8A7DE2A2E0467FB007EA031 /* ggml-base-encoder.mlmodelc */; };
+		F8A7DE312E048A03007EA031 /* Capturer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE302E0489D9007EA031 /* Capturer.swift */; };
+		F8A7DE332E04C6CF007EA031 /* SystemUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE322E04C6CD007EA031 /* SystemUtils.swift */; };
+		F8A7DE352E04D560007EA031 /* CoreAudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE342E04D560007EA031 /* CoreAudioUtils.swift */; };
+		F8A7DE372E06263F007EA031 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE362E06263C007EA031 /* SpeechRecognizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +44,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F8804DA32E06388E0077D223 /* AudioRecorder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioRecorder.mm; sourceTree = "<group>"; };
+		F8804DA42E0638AB0077D223 /* AudioRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioRecorder.h; sourceTree = "<group>"; };
+		F8804DA52E0638E60077D223 /* AudioTapSample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AudioTapSample-Bridging-Header.h"; sourceTree = "<group>"; };
 		F8A7DDEC2E045353007EA031 /* pera-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pera-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8A7DDFF2E045DAB007EA031 /* whisper.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = whisper.xcframework; path = "../whisper.cpp/build-apple/whisper.xcframework"; sourceTree = "<group>"; };
 		F8A7DE0D2E0466BA007EA031 /* LibWhisper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibWhisper.swift; sourceTree = "<group>"; };
@@ -52,6 +62,10 @@
 		F8A7DE292E0467FB007EA031 /* ggml-base.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ggml-base.bin"; sourceTree = "<group>"; };
 		F8A7DE2A2E0467FB007EA031 /* ggml-base-encoder.mlmodelc */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "ggml-base-encoder.mlmodelc"; sourceTree = "<group>"; };
 		F8A7DE2F2E046E8D007EA031 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F8A7DE302E0489D9007EA031 /* Capturer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capturer.swift; sourceTree = "<group>"; };
+		F8A7DE322E04C6CD007EA031 /* SystemUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemUtils.swift; sourceTree = "<group>"; };
+		F8A7DE342E04D560007EA031 /* CoreAudioUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAudioUtils.swift; sourceTree = "<group>"; };
+		F8A7DE362E06263C007EA031 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +134,13 @@
 		F8A7DE192E0467E7007EA031 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				F8804DA42E0638AB0077D223 /* AudioRecorder.h */,
+				F8804DA32E06388E0077D223 /* AudioRecorder.mm */,
+				F8804DA52E0638E60077D223 /* AudioTapSample-Bridging-Header.h */,
+				F8A7DE362E06263C007EA031 /* SpeechRecognizer.swift */,
+				F8A7DE322E04C6CD007EA031 /* SystemUtils.swift */,
+				F8A7DE342E04D560007EA031 /* CoreAudioUtils.swift */,
+				F8A7DE302E0489D9007EA031 /* Capturer.swift */,
 				F8A7DE172E0467E7007EA031 /* Recorder.swift */,
 				F8A7DE182E0467E7007EA031 /* RiffWaveUtils.swift */,
 			);
@@ -186,6 +207,7 @@
 				TargetAttributes = {
 					F8A7DDEB2E045353007EA031 = {
 						CreatedOnToolsVersion = 16.2;
+						LastSwiftMigration = 1620;
 					};
 				};
 			};
@@ -227,8 +249,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8804DA62E0639200077D223 /* AudioRecorder.h in Sources */,
+				F8804DA72E0639200077D223 /* AudioRecorder.mm in Sources */,
+				F8804DA82E0639200077D223 /* AudioTapSample-Bridging-Header.h in Sources */,
 				F8A7DE232E0467E7007EA031 /* Model.swift in Sources */,
 				F8A7DE242E0467E7007EA031 /* WhisperState.swift in Sources */,
+				F8A7DE372E06263F007EA031 /* SpeechRecognizer.swift in Sources */,
+				F8A7DE332E04C6CF007EA031 /* SystemUtils.swift in Sources */,
+				F8A7DE352E04D560007EA031 /* CoreAudioUtils.swift in Sources */,
+				F8A7DE312E048A03007EA031 /* Capturer.swift in Sources */,
 				F8A7DE252E0467E7007EA031 /* Recorder.swift in Sources */,
 				F8A7DE262E0467E7007EA031 /* RiffWaveUtils.swift in Sources */,
 				F8A7DE272E0467E7007EA031 /* ContentView.swift in Sources */,
@@ -299,6 +328,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OBJC_BRIDGING_HEADER = "pera-app/Utils/AudioTapSample-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -355,6 +385,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "pera-app/Utils/AudioTapSample-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -363,6 +394,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "pera-app/pera_app.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -375,6 +407,7 @@
 				INFOPLIST_FILE = "pera-app/Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "\"This app records audio to transcribe speech.\"";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "\"This app uses NSAudioCapture sound for speech recognition.\"";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -383,6 +416,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "pera.pera-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "pera-app/Utils/AudioTapSample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -392,6 +427,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "pera-app/pera_app.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -404,6 +440,7 @@
 				INFOPLIST_FILE = "pera-app/Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "\"This app records audio to transcribe speech.\"";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "\"This app uses NSAudioCapture sound for speech recognition.\"";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -412,6 +449,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "pera.pera-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "pera-app/Utils/AudioTapSample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;

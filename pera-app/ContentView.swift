@@ -8,6 +8,7 @@ import SwiftUI
 import AVFoundation
 import Foundation
 import AppKit
+import Speech
 
 struct ContentView: View {
     @StateObject var whisperState = WhisperState()
@@ -31,6 +32,14 @@ struct ContentView: View {
                     }
                     .buttonStyle(.bordered)
                     .disabled(!whisperState.canTranscribe)
+                    
+                    Button(whisperState.isCapturing ? "Stop Capturing" : "Start Capturing") {
+                        Task {
+                            await whisperState.toggleCapture()
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                    .disabled(!whisperState.canTranscribe)
                 }
                 
                 ScrollView {
@@ -43,6 +52,11 @@ struct ContentView: View {
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(6)
                 .frame(minHeight: 200)
+                
+                VStack(spacing: 50) {
+                    Text(whisperState.capturer?.recognizedText ?? "")
+                        .padding()
+                }
                 
                 HStack {
                     Button("Clear Logs") {

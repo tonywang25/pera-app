@@ -2,16 +2,20 @@ import Foundation
 import SwiftUI
 import AVFoundation
 
+// guarantee only this runs on the main thread
 @MainActor
 class WhisperState: NSObject, ObservableObject, AVAudioRecorderDelegate {
     @Published var isModelLoaded = false
     @Published var messageLog = ""
     @Published var canTranscribe = false
     @Published var isRecording = false
+    @Published var isCapturing = false
 
     private var whisperContext: WhisperContext?
     private let recorder = Recorder()
+    var capturer: Capturer?
     private var recordedFile: URL? = nil
+    private var capturedFile: URL? = nil
     private var audioPlayer: AVAudioPlayer?
 
     private var builtInModelUrl: URL? {
@@ -173,6 +177,33 @@ class WhisperState: NSObject, ObservableObject, AVAudioRecorderDelegate {
                 }
             }
         }
+    }
+    
+    func toggleCapture() async {
+        if isCapturing {
+            await stopCapturing()
+            messageLog += "Capture stopped...\n"
+            isCapturing = false
+            capturer = nil
+        } else {
+            // start capturing
+            do {
+                self.stopPlayback()
+                isCapturing = true
+                if capturer == nil {
+                    capturer = Capturer()
+                    messageLog += "Capture started...\n"
+                } else {
+                    messageLog += "Capturer not initialized.\n"
+                    return
+                }
+            }
+        }
+    }
+    
+    func stopCapturing() async {
+        capturer?.stopCapturing()
+        capturer = nil
     }
 
     private func startPlayback(_ url: URL) throws {
