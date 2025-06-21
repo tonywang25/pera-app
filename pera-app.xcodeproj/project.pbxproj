@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F85A204B2E07011300C3C39F /* CoreAudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85A204A2E07011300C3C39F /* CoreAudioUtils.swift */; };
 		F8804DA62E0639200077D223 /* AudioRecorder.h in Sources */ = {isa = PBXBuildFile; fileRef = F8804DA42E0638AB0077D223 /* AudioRecorder.h */; };
 		F8804DA72E0639200077D223 /* AudioRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = F8804DA32E06388E0077D223 /* AudioRecorder.mm */; };
 		F8804DA82E0639200077D223 /* AudioTapSample-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = F8804DA52E0638E60077D223 /* AudioTapSample-Bridging-Header.h */; };
@@ -24,9 +25,6 @@
 		F8A7DE2D2E0468FA007EA031 /* ggml-base.bin in Resources */ = {isa = PBXBuildFile; fileRef = F8A7DE292E0467FB007EA031 /* ggml-base.bin */; };
 		F8A7DE2E2E0468FF007EA031 /* ggml-base-encoder.mlmodelc in Resources */ = {isa = PBXBuildFile; fileRef = F8A7DE2A2E0467FB007EA031 /* ggml-base-encoder.mlmodelc */; };
 		F8A7DE312E048A03007EA031 /* Capturer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE302E0489D9007EA031 /* Capturer.swift */; };
-		F8A7DE332E04C6CF007EA031 /* SystemUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE322E04C6CD007EA031 /* SystemUtils.swift */; };
-		F8A7DE352E04D560007EA031 /* CoreAudioUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE342E04D560007EA031 /* CoreAudioUtils.swift */; };
-		F8A7DE372E06263F007EA031 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A7DE362E06263C007EA031 /* SpeechRecognizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,6 +42,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F85A204A2E07011300C3C39F /* CoreAudioUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAudioUtils.swift; sourceTree = "<group>"; };
 		F8804DA32E06388E0077D223 /* AudioRecorder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioRecorder.mm; sourceTree = "<group>"; };
 		F8804DA42E0638AB0077D223 /* AudioRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioRecorder.h; sourceTree = "<group>"; };
 		F8804DA52E0638E60077D223 /* AudioTapSample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AudioTapSample-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -63,9 +62,6 @@
 		F8A7DE2A2E0467FB007EA031 /* ggml-base-encoder.mlmodelc */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "ggml-base-encoder.mlmodelc"; sourceTree = "<group>"; };
 		F8A7DE2F2E046E8D007EA031 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F8A7DE302E0489D9007EA031 /* Capturer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capturer.swift; sourceTree = "<group>"; };
-		F8A7DE322E04C6CD007EA031 /* SystemUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemUtils.swift; sourceTree = "<group>"; };
-		F8A7DE342E04D560007EA031 /* CoreAudioUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAudioUtils.swift; sourceTree = "<group>"; };
-		F8A7DE362E06263C007EA031 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +113,8 @@
 		F8A7DE142E0467E7007EA031 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F8A7DE302E0489D9007EA031 /* Capturer.swift */,
+				F8A7DE172E0467E7007EA031 /* Recorder.swift */,
 				F8A7DE122E0467E7007EA031 /* Model.swift */,
 				F8A7DE132E0467E7007EA031 /* WhisperState.swift */,
 			);
@@ -134,14 +132,10 @@
 		F8A7DE192E0467E7007EA031 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				F85A204A2E07011300C3C39F /* CoreAudioUtils.swift */,
 				F8804DA42E0638AB0077D223 /* AudioRecorder.h */,
 				F8804DA32E06388E0077D223 /* AudioRecorder.mm */,
 				F8804DA52E0638E60077D223 /* AudioTapSample-Bridging-Header.h */,
-				F8A7DE362E06263C007EA031 /* SpeechRecognizer.swift */,
-				F8A7DE322E04C6CD007EA031 /* SystemUtils.swift */,
-				F8A7DE342E04D560007EA031 /* CoreAudioUtils.swift */,
-				F8A7DE302E0489D9007EA031 /* Capturer.swift */,
-				F8A7DE172E0467E7007EA031 /* Recorder.swift */,
 				F8A7DE182E0467E7007EA031 /* RiffWaveUtils.swift */,
 			);
 			path = Utils;
@@ -254,11 +248,9 @@
 				F8804DA82E0639200077D223 /* AudioTapSample-Bridging-Header.h in Sources */,
 				F8A7DE232E0467E7007EA031 /* Model.swift in Sources */,
 				F8A7DE242E0467E7007EA031 /* WhisperState.swift in Sources */,
-				F8A7DE372E06263F007EA031 /* SpeechRecognizer.swift in Sources */,
-				F8A7DE332E04C6CF007EA031 /* SystemUtils.swift in Sources */,
-				F8A7DE352E04D560007EA031 /* CoreAudioUtils.swift in Sources */,
 				F8A7DE312E048A03007EA031 /* Capturer.swift in Sources */,
 				F8A7DE252E0467E7007EA031 /* Recorder.swift in Sources */,
+				F85A204B2E07011300C3C39F /* CoreAudioUtils.swift in Sources */,
 				F8A7DE262E0467E7007EA031 /* RiffWaveUtils.swift in Sources */,
 				F8A7DE272E0467E7007EA031 /* ContentView.swift in Sources */,
 				F8A7DE282E0467E7007EA031 /* pera_appApp.swift in Sources */,

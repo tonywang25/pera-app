@@ -13,64 +13,61 @@ import CoreAudio
 class Capturer {
     var recognizedText: String = ""
     var isCapturing: Bool = false
-    var audioEngine: AVAudioEngine!
+    // SFSpeechRecognizer member variables
     private var speechRecognizer: SFSpeechRecognizer!
     var recognitionRequest: SFSpeechAudioBufferRecognitionRequest!
-    var request: SFSpeechAudioBufferRecognitionRequest!
     var recognitionTask: SFSpeechRecognitionTask!
     
-    var inputNode: AVAudioInputNode!
+    // queue buffer
+    private let queue = DispatchQueue(label: "ProcessTapRecorder", qos: .userInitiated)
+    var muteWhenRunning: Bool = false
     
+    @ObservationIgnored
+    private var processTapID: AudioObjectID!
+    @ObservationIgnored
+    private var aggregateDeviceID: AudioObjectID!
+    @ObservationIgnored
+    private var deviceProcID: AudioDeviceIOProcID?
     @ObservationIgnored
     private var tapStreamDescription: AudioStreamBasicDescription?
     
-    // process
-    var pid: pid_t?
-    var muteWhenRunning: Bool = false
-    var aggregateDeviceID: AudioObjectID!
     
     init() {
-        // identify target process where system output is
-        guard let pid = getFocusAppPID() else {
-            print("Error fetching pid")
-            exit(1)
-        }
-        
-        self.pid = pid
-        print("Successfully fetched pid: \(pid)")
-        
-        // translate pid to AudioObjectID
-        let AudioOID = translatePIDtoAudioObjectID(pid)
-        
-        print("Successfully fetched AudioObjectID: \(AudioOID)")
         
         // set up speech recognizer
         setupSpeechRecognition()
         
-//        // create tap and retrieve its UUID
-//        let processTapID = createProcessTap(AudioOID)
-//        // get aggregate tap ID
-//        let aggTapID = createAggregateDevice(processTapID)
+        // create global process tap
+        self.processTapID = createGlobalTap()
         
-        let globalTapID = createGlobalTap()
+        // Create Aggregate Device
+        self.aggregateDeviceID = createAggregateDevice()
         
-        let aggID = createAggregateDevice(globalTapID)
+        // add Tap to Aggregate Device
+        addTapToAggregate(from: self.processTapID, to: self.aggregateDeviceID)
         
-        addTapToAggregate(globalTapID, aggID)
+        print("Successfully fetched Aggregate device ID: \(aggregateDeviceID!)")
         
-        print("Successfully fetched Aggregate device ID: \(aggID)")
+        do {
+            self.tapStreamDescription = try processTapID.readAudioTapStreamBasicDescription()
+        } catch {
+            print("error reading stream description")
+        }
         
-        // capture AV from aggregator device
-        startCapturing(from: aggID)
+        // START CAPTURING FROM AGGREGATOR DEVICE
+        do {
+            try startCapturing(from: aggregateDeviceID)
+        } catch {
+            print("error capturing")
+        }
         
         print("capturing...")
     }
     
+    
     func setupSpeechRecognition() {
         // set up the speech recognizer
-        speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "ja-JP"))
-        // initialize AVAudioEngine
-        audioEngine = AVAudioEngine()
+        self.speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "ja-JP"))
         // set up permissions
         SFSpeechRecognizer.requestAuthorization { status in
             DispatchQueue.main.async {
@@ -86,7 +83,7 @@ class Capturer {
         }
     }
     
-//    consider changing AUAudioObjectID -> AudioObjectID
+    //    consider changing AUAudioObjectID -> AudioObjectID
     func createProcessTap(_ AudioOID: AudioObjectID) -> AUAudioObjectID {
         // compose a tap description
         let tapDescription = CATapDescription(stereoMixdownOfProcesses: [AudioOID])
@@ -114,7 +111,7 @@ class Capturer {
         return tapID
     }
     
-    func createAggregateDevice(_ processTapID: AudioObjectID) -> AudioObjectID {
+    func createAggregateDevice() -> AudioDeviceID {
         let aggName = "MyTapAggregate-\(UUID().uuidString)"
         let aggUID = "com.myapp.aggregate.\(UUID().uuidString)" as CFString
         let tapListEntry: CFDictionary = [
@@ -131,16 +128,15 @@ class Capturer {
         ] as! CFMutableDictionary
         
         // actually create the aggregate device
-
+        
         var aggregateDeviceID: AudioObjectID = 0
         
         AudioHardwareCreateAggregateDevice(aggDict as CFDictionary, &aggregateDeviceID)
         
-        self.aggregateDeviceID = aggregateDeviceID
         return aggregateDeviceID
     }
     
-    func addTapToAggregate(_ tapID: AudioObjectID, _ aggID: AudioObjectID) {
+    func addTapToAggregate(from tapID: AUAudioObjectID, to aggID: AudioDeviceID) {
         // Get the UID of the audio tap.
         var tapPropAddress = getPropertyAddress(selector: kAudioTapPropertyUID)
         var tapPropSize = UInt32(MemoryLayout<CFString>.stride)
@@ -149,7 +145,6 @@ class Capturer {
             AudioObjectGetPropertyData(tapID, &tapPropAddress, 0, nil, &tapPropSize, tapUID)
         }
         
-        // initialize propAddress
         var listPropAddress = getPropertyAddress(selector: kAudioAggregateDevicePropertyTapList)
         var listPropSize: UInt32 = 0
         AudioObjectGetPropertyDataSize(aggID, &listPropAddress, 0, nil, &listPropSize)
@@ -158,13 +153,12 @@ class Capturer {
             AudioObjectGetPropertyData(aggID, &listPropAddress, 0, nil, &listPropSize, list)
         }
         
-
+        
         if var listAsArray = list as? [CFString] {
             if !listAsArray.contains(tapUID as CFString) {
                 listAsArray.append(tapUID as CFString)
                 listPropSize += UInt32(MemoryLayout<CFString>.stride)
             }
-            // Set the list back on the aggregate device.
             list = listAsArray as CFArray
             _ = withUnsafeMutablePointer(to: &list) { list in
                 AudioObjectSetPropertyData(aggID, &listPropAddress, 0, nil, listPropSize, list)
@@ -173,8 +167,6 @@ class Capturer {
         print("Tap added!")
     }
     
-    /// Helper to create an AudioObjectPropertyAddress for a given selector,
-    /// using global scope and main element by default.
     func getPropertyAddress(selector: AudioObjectPropertySelector,
                             scope: AudioObjectPropertyScope = kAudioObjectPropertyScopeGlobal,
                             element: AudioObjectPropertyElement = kAudioObjectPropertyElementMain
@@ -186,112 +178,72 @@ class Capturer {
         )
     }
     
-    func setDefaultInput(as aggTapID: AudioObjectID) {
-        var id = aggTapID
-        var address = AudioObjectPropertyAddress(
-            mSelector: kAudioHardwarePropertyDefaultInputDevice,
-            mScope:    kAudioObjectPropertyScopeGlobal,
-            mElement:  kAudioObjectPropertyElementMain
-        )
-        AudioObjectSetPropertyData(AudioObjectID(kAudioObjectSystemObject), &address, 0, nil, UInt32(MemoryLayout<AudioObjectID>.size), &id)
-    }
-    
-    func startCapturing(from aggTapID: AudioObjectID) {
+    func startCapturing(from aggTapID: AudioObjectID) throws {
         
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         recognitionRequest.shouldReportPartialResults = true
         isCapturing = true
         
-        // set default engine as the aggregate tap ID
-        setDefaultInput(as: aggTapID)
-        
-        // input node now points to the aggTapID
-        inputNode = audioEngine.inputNode
-        let format = inputNode.outputFormat(forBus: 0)
-        inputNode.removeTap(onBus: 0)
-        
-        // install the tap onto the input node
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { buffer, when in
-            self.recognitionRequest.append(buffer)
+        guard var streamDescription = tapStreamDescription else {
+            print("Tap stream description not available")
+            return
         }
         
-        // start the audio engine
-        audioEngine.prepare()
-        try! audioEngine.start()
-        print("Audio Engine started!")
+        guard let format = AVAudioFormat(streamDescription: &streamDescription) else {
+            print("Failed to create AVAudioFormat")
+            return
+        }
         
-        
-        speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
+        // callback for delivering transcription results
+        self.recognitionTask = self.speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
             if let result = result {
-                Task {
+                Task { @MainActor in
                     self.recognizedText = result.bestTranscription.formattedString
                 }
             }
-            if error != nil || result?.isFinal == true {
-                self.audioEngine.stop()
-                self.inputNode.removeTap(onBus: 0)
-                self.recognitionRequest = nil
-                self.recognitionTask = nil
+        }
+        
+        // callback for audio capture
+        // supplying raw audio data on a background queue.
+        try run(on: queue) { [weak self] _, inInputData, _, _, _ in
+            guard let self = self else { return }
+            
+            // Create a buffer from the incoming audio data.
+            guard let buffer = AVAudioPCMBuffer(pcmFormat: format, bufferListNoCopy: inInputData, deallocator: nil) else {
+                print("Failed to create PCM buffer")
+                return
             }
+            // APPEND TO BUFFER
+            self.recognitionRequest?.append(buffer)
         }
     }
     
     func stopCapturing () {
-        inputNode.removeTap(onBus: 0)
-        print("Tap removed!")
-        audioEngine.stop()
-        recognitionRequest.endAudio()
+        recognitionRequest?.endAudio()
         recognitionRequest = nil
         recognitionTask = nil
+        speechRecognizer = nil
         isCapturing = false
-        print("Audio Engine stopped!")
+        AudioDeviceStop(aggregateDeviceID, deviceProcID)
+        AudioDeviceDestroyIOProcID(aggregateDeviceID, deviceProcID!)
+        deviceProcID = nil
         AudioHardwareDestroyAggregateDevice(aggregateDeviceID)
-        print("Aggregate Device destroyed!")
+        aggregateDeviceID = nil
+        print("Recognizer, Devices, and Processes Destroyed!")
     }
-
     
-    // takes in the process AudioObjectID, creates the aggregate device, and returns the tap's UUID
-//    func buildAggregateDevice(_ AudioOID: AudioObjectID) -> AudioObjectID {
-//
-//
-//
-////        do {
-////            let systemOutputID = try AudioDeviceID.readDefaultSystemOutputDevice()
-////            let outputUID = try systemOutputID.readDeviceUID()
-////        } catch {
-////            print("Error reading system output device: \(error)")
-////        }
-//
-//        let aggregateUID = UUID().uuidString
-//
-//        let description: [String: Any] = [
-//                    kAudioAggregateDeviceNameKey: "Tap-\(pid)",
-//                    kAudioAggregateDeviceUIDKey: aggregateUID,
-//                    kAudioAggregateDeviceMainSubDeviceKey: processID,
-//                    kAudioAggregateDeviceIsPrivateKey: true,
-//                    kAudioAggregateDeviceIsStackedKey: false,
-//                    kAudioAggregateDeviceTapAutoStartKey: true,
-//                    kAudioAggregateDeviceSubDeviceListKey: [
-//                        [
-//                            kAudioSubDeviceUIDKey: processID
-//                        ]
-//                    ],
-//                    kAudioAggregateDeviceTapListKey: [
-//                        [
-//                            kAudioSubTapDriftCompensationKey: true,
-//                            kAudioSubTapUIDKey: tapDescription.uuid.uuidString
-//                        ]
-//                    ]
-//                ]
-//        do {
-//            self.tapStreamDescription = try tapID.readAudioTapStreamBasicDescription()
-//        } catch {
-//            print("Error getting tap stream description")
-//        }
-//
-//        aggregateDeviceID = kAudioObjectUnknown
-//
-//        AudioHardwareCreateAggregateDevice(description as CFDictionary, &aggregateDeviceID)
-//
-//    }
+    func run(on queue: DispatchQueue, ioBlock: @escaping AudioDeviceIOBlock) throws {
+        
+        var err = AudioDeviceCreateIOProcIDWithBlock(&deviceProcID, aggregateDeviceID, queue, ioBlock)
+        guard err == noErr else {
+            print("Failed to create device I/O proc: \(err)")
+            return
+        }
+        
+        err = AudioDeviceStart(aggregateDeviceID, deviceProcID)
+        guard err == noErr else {
+            print("Failed to start audio device: \(err)")
+            return
+        }
+    }
 }
